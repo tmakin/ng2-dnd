@@ -1,0 +1,34 @@
+<main class="app">
+    <div id="container1">
+        <div id="col1">
+            <div *ngFor="let snippet of snippets">
+                <div
+                        dnd-sortable-draggable
+                        [dragEnabled]="true"
+                        [dragData]="snippet"
+                >
+                    <div class="snippet">{{snippet}}</div>
+                </div>
+            </div>
+        </div>
+        <div id="col2" dnd-droppable
+             (onDropSuccess)="dropSnippet($event)">
+            <div *ngFor="let item of dropped">
+                {{item}}
+            </div>
+        </div>
+        <div id="col3" class="panel-body"  dnd-sortable-container (onDropSuccess)="dropSnippet2($event)" [sortableData]="sortableData">
+            <ul class="list-group" >
+                <div *ngFor="let snippet of sortableData; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i">
+                    <div class="snippet">{{snippet}}</div>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+</main>
+
+
+<footer class="footer">
+    © Neatlines 2016
+</footer>
