@@ -11,18 +11,26 @@
   }
   #col2 {
     float:left;
-    width:40%;
+    width:10%;
     background:yellow;
     min-height: 200px;
   }
   #col3 {
     float:left;
-    width:30%;
+    width:50%;
     background:green;
-    min-height: 300px;
+
   }
   .snippet {
-    height:50px;
+    margin: 10px;
+    min-height:50px;
+    background: rgba(100,100,100, 0.5);
+  }
+  .panel-body {
+    padding:5px;
+    min-height: 400px;
+  }
+  .list-group-item {
     background: rgba(100,100,100, 0.5);
   }
 }
