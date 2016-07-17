@@ -17,6 +17,11 @@ export class DraggableComponent extends AbstractComponent {
     }
 
     /**
+     * Clone the drag data before drag
+     */
+    @Input() clone:boolean;
+
+    /**
      * Callback function called when the drag actions happened.
      */
     @Output() onDragStart: EventEmitter<DragDropData> = new EventEmitter<DragDropData>();
@@ -50,6 +55,8 @@ export class DraggableComponent extends AbstractComponent {
     @Input("effectCursor") set effectcursor(value: string) {
         this.effectCursor = value;
     }
+
+
 
     /**
      * Here is the property dragImage you can use:
@@ -85,20 +92,43 @@ export class DraggableComponent extends AbstractComponent {
     }
 
     _onDragStartCallback(event: MouseEvent) {
-        this._dragDropService.isDragged = true;
-        this._dragDropService.dragData = this.dragData;
-        this._dragDropService.onDragSuccessCallback = this.onDragSuccessCallback;
+
+        var data = this.dragData;
+
+        //clone data if required
+        if(this.clone) {
+            console.log("clone enabled");
+            data = DraggableComponent.cloneObject(data);
+            if(data == this.dragData) {
+                console.error("dragData is still equal after clone, consider wrapping in object", data);
+                return;
+            }
+        }
+
+        this._dragDropService.start(data, this.onDragSuccessCallback);
         this._elem.classList.add(this._config.onDragStartClass);
         //
         this.onDragStart.emit({dragData: this.dragData, mouseEvent: event});
     }
 
     _onDragEndCallback(event: MouseEvent) {
-        this._dragDropService.isDragged = false;
-        this._dragDropService.dragData = null;
-        this._dragDropService.onDragSuccessCallback = null;
+        this._dragDropService.end();
         this._elem.classList.remove(this._config.onDragStartClass);
         //
         this.onDragEnd.emit({dragData: this.dragData, mouseEvent: event});
     }
+
+    private static cloneObject(obj:any) {
+        if (obj === null || typeof obj !== 'object') {
+            return obj;
+        }
+
+        var temp = obj.constructor(); // give temp the original obj's constructor
+        for (var key in obj) {
+            temp[key] = DraggableComponent.cloneObject(obj[key]);
+        }
+
+        return temp;
+    }
+
 }

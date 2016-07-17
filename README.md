@@ -434,7 +434,7 @@ bootstrap(AppComponent, [
                 Favorite drinks
             </div>
             <div class="panel-body">
-                <ul class="list-group" dnd-sortable-container [sortableData]="listOne">
+                <ul class="list-group" dnd-sortable-container [listData]="listOne">
                     <li *ngFor="#item of listOne; #i = index" class="list-group-item" dnd-sortable [sortableIndex]="i">{{item}}</li>
                 </ul>
             </div>
@@ -478,7 +478,7 @@ bootstrap(AppComponent, [
         <div class="panel-heading">
           Available boxers
         </div>
-        <div class="panel-body" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="listBoxers">
+        <div class="panel-body" dnd-sortable-container [dropZones]="['boxers-zone']" [listData]="listBoxers">
           <ul class="list-group" >
             <li *ngFor="#item of listBoxers; #i = index" class="list-group-item" dnd-sortable [sortableIndex]="i">{{item}}</li>
           </ul>
@@ -490,7 +490,7 @@ bootstrap(AppComponent, [
         <div class="panel-heading">
           First Team
         </div>
-        <div class="panel-body" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="listTeamOne">
+        <div class="panel-body" dnd-sortable-container [dropZones]="['boxers-zone']" [listData]="listTeamOne">
           <ul class="list-group" >
             <li *ngFor="#item of listTeamOne; #i = index" class="list-group-item" dnd-sortable [sortableIndex]="i">{{item}}</li>
           </ul>
@@ -502,7 +502,7 @@ bootstrap(AppComponent, [
         <div class="panel-heading">
           Second Team
         </div>
-        <div class="panel-body" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="listTeamTwo">
+        <div class="panel-body" dnd-sortable-container [dropZones]="['boxers-zone']" [listData]="listTeamTwo">
           <ul class="list-group">
             <li *ngFor="#item of listTeamTwo; #i = index" class="list-group-item" dnd-sortable [sortableIndex]="i">{{item}}</li>
           </ul>

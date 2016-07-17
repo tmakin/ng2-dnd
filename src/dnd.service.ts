@@ -14,10 +14,30 @@ export interface DragDropData {
 
 @Injectable()
 export class DragDropService {
-    allowedDropZones: Array<string> = [];
-    onDragSuccessCallback: EventEmitter<DragDropData>;
-    dragData: any;
-    isDragged: boolean;
+    public allowedDropZones: Array<string> = [];
+    public onDragSuccessCallback: EventEmitter<DragDropData>;
+    public dragData: any;
+    public isDragged: boolean;
+
+    /**
+     * flag use to keep track of the current level of nesting inside a list container.
+     * Should be reset to zero at start of new grag operation
+     */
+    public depth:number;
+
+    public start(dragData:any, onDragSuccessCallback: EventEmitter<DragDropData> = null)
+    {
+        this.dragData = dragData;
+        this.depth = 0;
+        this.isDragged = true;
+        this.onDragSuccessCallback = onDragSuccessCallback;
+    }
+
+    public end() {
+        this.dragData = null;
+        this.depth = 0;
+        this.isDragged = false;
+    }
 }
 
 @Injectable()
