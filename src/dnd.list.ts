@@ -80,7 +80,7 @@ export class ListContainer extends AbstractComponent {
                 return;
             }
 
-            console.log("item created");
+            //console.log("item created");
             //add the item, this will cause the ng-for to rebuild
             this.listData.push(item);
 
@@ -100,7 +100,7 @@ export class ListContainer extends AbstractComponent {
         let item:any = this._dragDropService.dragData;
 
         this.removeItem(item);
-        console.log("item zapped ", this._dragDropService.depth);
+        //console.log("item zapped ", this._dragDropService.depth);
     }
 
     contains(item:any):boolean {
@@ -142,9 +142,7 @@ export class ListContainer extends AbstractComponent {
 
         this.listData.splice(index, 0, item);
 
-
-        console.log("item inserted at %d", index);
-        //console.log("item inserted at %d :", index, item);
+        //console.log("item inserted at %d", index);
         return true;
     }
 
@@ -156,8 +154,7 @@ export class ListContainer extends AbstractComponent {
         this.listData.splice(index, 0, item);
 
         this.isDirty = true;
-        console.log("item inserted at %d :", index);
-        //console.log("item inserted at %d :", index, item);
+        //console.log("item inserted at %d :", index);
         return true;
     }
 }
@@ -186,14 +183,7 @@ export class ListItem extends AbstractComponent {
     @Input("effectAllowed") set effectallowed(value: string) {
         this.effectAllowed = value;
     }
-
-    /**
-     * Drag effect cursor
-     */
-    @Input("effectCursor") set effectcursor(value: string) {
-        this.effectCursor = value;
-    }
-
+    
     /**
      * Callback function called when the drag action ends with a valid drop action.
      * It is activated after the on-drop-success callback
@@ -212,7 +202,7 @@ export class ListItem extends AbstractComponent {
         super(elemRef, dragDropService, config, cdr);
 
         this.dropZones = this._listContainer.dropZones;
-        this.dragEnabled = false;
+        this.dragEnabled = true;
         this.dropEnabled = true;
     }
 
@@ -252,7 +242,7 @@ export class ListItem extends AbstractComponent {
             let item:any = this._dragDropService.dragData;
 
             if(item == null || item == this.dragData) {
-                console.log("drag enter blocked");
+                //console.log("drag enter blocked");
                 return;
             }
 

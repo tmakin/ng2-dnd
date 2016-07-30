@@ -39,13 +39,7 @@ export class DroppableComponent extends AbstractComponent {
     @Input("effectAllowed") set effectallowed(value: string) {
         this.effectAllowed = value;
     }
-
-    /**
-     * Drag effect cursor
-     */
-    @Input("effectCursor") set effectcursor(value: string) {
-        this.effectCursor = value;
-    }
+    
 
     constructor(elemRef: ElementRef, dragDropService: DragDropService, config:DragDropConfig,
         cdr:ChangeDetectorRef) {

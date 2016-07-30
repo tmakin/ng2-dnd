@@ -50,15 +50,6 @@ export class DraggableComponent extends AbstractComponent {
     }
 
     /**
-     * Drag effect cursor
-     */
-    @Input("effectCursor") set effectcursor(value: string) {
-        this.effectCursor = value;
-    }
-
-
-
-    /**
      * Here is the property dragImage you can use:
      * - The string value as url to the image
      *   <div class="panel panel-default"
@@ -87,7 +78,6 @@ export class DraggableComponent extends AbstractComponent {
         cdr:ChangeDetectorRef) {
 
         super(elemRef, dragDropService, config, cdr);
-        this._defaultCursor = this._elem.style.cursor;
         this.dragEnabled = true;
     }
 
@@ -97,7 +87,7 @@ export class DraggableComponent extends AbstractComponent {
 
         //clone data if required
         if(this.clone) {
-            console.log("clone enabled");
+            //console.log("clone enabled");
             data = DraggableComponent.cloneObject(data);
             if(data == this.dragData) {
                 console.error("dragData is still equal after clone, consider wrapping in object", data);

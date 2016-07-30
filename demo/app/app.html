@@ -12,22 +12,29 @@
                 </div>
             </div>
         </div>
-        <div id="col2" dnd-droppable
-             (onDropSuccess)="dropSnippet($event)">
-            <div *ngFor="let item of dropped">
-                {{item}}
-            </div>
-        </div>
-        <div id="col3">
+        <div id="col2">
             <div>{{listData.length}} Elements</div>
             <hr/>
 
-            <div class="panel-body" dnd-list-container (onDropSuccess)="dropSnippet2($event)" [listData]="listData">
+            <div class="panel-body" dnd-list-container (onDropSuccess)="dropSnippet($event)" [listData]="listData">
                 <ul class="list-group" >
-                    <div *ngFor="let snippet of listData; let i = index" class="list-group-item"
+                    <div *ngFor="let snippet of listData" class="list-group-item"
                          dnd-list-item
-                         [dragData]="snippet"
-                         [listIndex]="i">
+                         [dragData]="snippet">
+                        <div class="snippet">{{snippet.data}}</div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <div id="col3">
+            <div>{{listData2.length}} Elements</div>
+            <hr/>
+
+            <div class="panel-body" dnd-list-container (onDropSuccess)="dropSnippet2($event)" [listData]="listData2">
+                <ul class="list-group" >
+                    <div *ngFor="let snippet of listData2" class="list-group-item"
+                         dnd-list-item
+                         [dragData]="snippet">
                         <div dnd-drag-handle>Drag Handle</div>
                         <div class="snippet">{{snippet.data}}</div>
                     </div>

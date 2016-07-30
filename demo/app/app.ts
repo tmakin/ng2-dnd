@@ -16,13 +16,11 @@ export class App {
 
     private snippets:any[];
 
-    private dropped:string[];
-    private listData:string[];
+    private listData:string[]  = [];
+    private listData2:string[] = [];
 
     constructor() {
         this.snippets = App.buildSnippets();
-        this.dropped = [];
-        this.listData = [];
 
     }
 
@@ -42,12 +40,12 @@ export class App {
 
     dropSnippet(event:any) {
         console.log("dropped data");
-        this.dropped.push(event.dragData);
+        //this.dropped.push(event.dragData);
     }
 
     dropSnippet2(event:any) {
         console.log("dropped data2");
-        this.listData.push(event.dragData);
+        //this.listData.push(event.dragData);
     }
 
     static SNIPPET_DATA:string[] = [

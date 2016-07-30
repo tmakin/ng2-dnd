@@ -44,7 +44,7 @@ export class SortableContainer extends AbstractComponent {
     _onDragEnterCallback(event: Event) {
         if (this._sortableDataService.isDragged) {
             let item:any = this._sortableDataService.sortableData[this._sortableDataService.index];
-            // Check does element exist in sortableData of this Container
+            // Check does element exist in listData of this Container
             if (this._sortableData.indexOf(item) === -1) {
                 // Let's add it
                 // console.log('Container._onDragEnterCallback. drag node [' + this._sortableDataService.index.toString() + '] over parent node');
@@ -85,14 +85,7 @@ export class SortableComponent extends AbstractComponent {
     @Input("effectAllowed") set effectallowed(value: string) {
         this.effectAllowed = value;
     }
-
-    /**
-     * Drag effect cursor
-     */
-    @Input("effectCursor") set effectcursor(value: string) {
-        this.effectCursor = value;
-    }
-
+    
     /**
      * Callback function called when the drag action ends with a valid drop action.
      * It is activated after the on-drop-success callback

@@ -12,7 +12,7 @@ import {isString, isFunction, isPresent, createImage, callFun} from './dnd.utils
 @Injectable()
 export abstract class AbstractComponent {
     _elem: HTMLElement;
-    _defaultCursor: string;
+    _defaultCursor: string = "grab";
 
     /**
      * Whether the object is draggable. Default is true.
@@ -34,10 +34,6 @@ export abstract class AbstractComponent {
      * Drag effect
      */
     effectAllowed: string;
-    /**
-     * Drag cursor
-     */
-    effectCursor: string;
 
     /**
      * Restrict places where a draggable element can be dropped. Either one of
@@ -111,7 +107,7 @@ export abstract class AbstractComponent {
         // Drag events
         //
         this._elem.ondragstart = (event: DragEvent) => {
-            // console.log('ondragstart', event.target);
+            console.log('ondragstart', event.target);
             this._onDragStart(event);
             //
             if (event.dataTransfer != null) {
@@ -132,19 +128,17 @@ export abstract class AbstractComponent {
                     let dragImage: DragImage = this._config.dragImage;
                     (<any>event.dataTransfer).setDragImage(dragImage.imageElement, dragImage.x_offset, dragImage.y_offset);
                 }
-                // Change drag cursor
-                if (this._dragEnabled) {
-                    this._elem.style.cursor = this.effectCursor ? this.effectCursor : this._config.dragCursor;
-                } else {
-                    this._elem.style.cursor = this._defaultCursor;
-                }
+
+
+                this._elem.classList.add(this._config.onDragStartClass);
             }
         };
         this._elem.ondragend = (event: Event) => {
-            // console.log('ondragend', event.target);
+            console.log('ondragend', event.target);
             this._onDragEnd(event);
+
             // Restore style of dragged element
-            this._elem.style.cursor = this._defaultCursor;
+            this._elem.classList.remove(this._config.onDragStartClass);
         };
     }
 
